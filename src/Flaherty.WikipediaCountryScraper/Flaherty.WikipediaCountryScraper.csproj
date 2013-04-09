@@ -54,6 +54,7 @@
     <Compile Include="Scraper.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Flaherty.WikipediaCountryScraper.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
