@@ -1,31 +1,57 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="AdministrativeSubdivisionScraperTest.cs" company="James Flaherty">
+//   2013
+// </copyright>
+// <summary>
+//   The administrative subdivision scraper test.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
-namespace Flaherty.WikipediaCountryScraper.Tests
+namespace Flaherty.WikipediaCountryScraper
 {
-    [TestClass]
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
+    using NUnit.Framework;
+
+    /// <summary>
+    /// The administrative subdivision scraper test.
+    /// </summary>
+    [TestFixture]
     public class AdministrativeSubdivisionScraperTest
     {
-        private static IEnumerable<AdministrativeSubdivision> _usSubdivisions;
+        /// <summary>
+        /// The us subdivisions.
+        /// </summary>
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1305:FieldNamesMustNotUseHungarianNotation", Justification = "Reviewed. Suppression is OK here.")]
+        private IEnumerable<AdministrativeSubdivision> usSubdivisions;
 
-        [ClassInitialize]
-        public static void ClassInitialize(TestContext context)
+        /// <summary>
+        /// The class initialize.
+        /// </summary>
+        [SetUp]
+        public void ClassInitialize()
         {
             var scraper = new AdministrativeSubdivisionScraper("US");
-            _usSubdivisions = scraper.Scrape();
+            this.usSubdivisions = scraper.Scrape();
         }
 
-        [TestMethod]
-        public void AdministrativeSubdivisionScraper_Scrape_ReturnsData()
+        /// <summary>
+        /// The administrative subdivision scraper scrape returns data.
+        /// </summary>
+        [Test]
+        public void AdministrativeSubdivisionScraperScrapeReturnsData()
         {
-            Assert.IsTrue(_usSubdivisions.Any());
+            Assert.IsTrue(this.usSubdivisions.Any());
         }
 
-        [TestMethod]
-        public void AdministrativeSubdivisionScraper_Scrape_ContiansValidData()
+        /// <summary>
+        /// The administrative subdivision scraper scrape contains valid data.
+        /// </summary>
+        [Test]
+        public void AdministrativeSubdivisionScraperScrapeContainsValidData()
         {
-            var ny = _usSubdivisions.FirstOrDefault(x => x.IsoCode == "US-NY");
+            var ny = this.usSubdivisions.FirstOrDefault(x => x.IsoCode == "US-NY");
             Assert.IsNotNull(ny);
             Assert.AreEqual("New York", ny.Name);
         }

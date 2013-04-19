@@ -1,15 +1,23 @@
-﻿using System.Reflection;
-using System.Runtime.CompilerServices;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="AssemblyInfo.cs" company="James Flaherty">
+//   2013
+// </copyright>
+// <summary>
+//   AssemblyInfo.cs
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Flaherty.CountryScraper.Tests")]
+[assembly: AssemblyTitle("Flaherty.WikipediaCountryScraper.Tests2")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Flaherty.CountryScraper.Tests")]
+[assembly: AssemblyProduct("Flaherty.WikipediaCountryScraper.Tests2")]
 [assembly: AssemblyCopyright("Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +28,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("2ee93916-1cac-4711-afb8-0020e37946db")]
+[assembly: Guid("442a13e9-fa88-41f7-98dc-ce3ea8320f3e")]
 
 // Version information for an assembly consists of the following four values:
 //

@@ -1,51 +1,81 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="CountryScraperTest.cs" company="James Flaherty">
+//   2013
+// </copyright>
+// <summary>
+//   Defines the CountryScraperTest type.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
-namespace Flaherty.WikipediaCountryScraper.Tests
+namespace Flaherty.WikipediaCountryScraper
 {
-    [TestClass]
+    using System.Collections.Generic;
+    using System.Linq;
+    using NUnit.Framework;
+
+    /// <summary>
+    /// The country scraper test.
+    /// </summary>
+    [TestFixture]
     public class CountryScraperTest
     {
-        private static IEnumerable<Country> _countries;
+        /// <summary>
+        /// The countries.
+        /// </summary>
+        private IEnumerable<Country> countries;
 
-        [ClassInitialize]
-        public static void ClassInitialize(TestContext context)
+        /// <summary>
+        /// Initializes the test fixture.
+        /// </summary>
+        [SetUp]
+        public void Init()
         {
             var scraper = new CountryScraper();
-            _countries = scraper.Scrape();
+            this.countries = scraper.Scrape();
         }
 
-        [TestMethod]
-        public void CountryScraper_Scrape_ReturnsData()
+        /// <summary>
+        /// The country scraper scrape returns data.
+        /// </summary>
+        [Test]
+        public void CountryScraperScrapeReturnsData()
         {
-            Assert.IsTrue(_countries.Any());
+            Assert.IsTrue(this.countries.Any());
         }
 
-        [TestMethod]
-        public void CountryScraper_Scrape_ContiansValidData()
+        /// <summary>
+        /// The country scraper scrape contains valid data.
+        /// </summary>
+        [Test]
+        public void CountryScraperScrapeContainsValidData()
         {
-            var us = _countries.FirstOrDefault(x => x.IsoCode == "US");
+            var us = this.countries.FirstOrDefault(x => x.IsoCode == "US");
             Assert.IsNotNull(us);
             Assert.AreEqual("United States", us.Name);
         }
 
-        [TestMethod]
-        public void CountryScraper_Scrape_ContainsGreatBritainAndNotEngland()
+        /// <summary>
+        /// The country scraper scrape contains great britain and not england.
+        /// </summary>
+        [Test]
+        public void CountryScraperScrapeContainsGreatBritainAndNotEngland()
         {
-            var gb = _countries.FirstOrDefault(x => x.IsoCode == "GB");
-            var eng = _countries.FirstOrDefault(x => x.IsoCode == "ENG");
+            var gb = this.countries.FirstOrDefault(x => x.IsoCode == "GB");
+            var eng = this.countries.FirstOrDefault(x => x.IsoCode == "ENG");
             Assert.IsNotNull(gb);
             Assert.IsNull(eng);
         }
 
-        [TestMethod]
-        public void CountryScraper_ScrapeSplitGreatBritain_ContainsEnglandAndNotGreatBritain()
+        /// <summary>
+        /// The country scraper scrape split great britain contains england and not great britain.
+        /// </summary>
+        [Test]
+        public void CountryScraperScrapeSplitGreatBritainContainsEnglandAndNotGreatBritain()
         {
             var scraper = new CountryScraper(true);
-            var countries = scraper.Scrape().ToList();
-            var gb = countries.FirstOrDefault(x => x.IsoCode == "GB");
-            var eng = countries.FirstOrDefault(x => x.IsoCode == "ENG");
+            var scrapedCountries = scraper.Scrape().ToList();
+            var gb = scrapedCountries.FirstOrDefault(x => x.IsoCode == "GB");
+            var eng = scrapedCountries.FirstOrDefault(x => x.IsoCode == "ENG");
             Assert.IsNull(gb);
             Assert.IsNotNull(eng);
         }
